@@ -30,7 +30,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int currentTimeZone = 1;              // Default time zone offset (CET)
+int currentTimeZone = 1;             // Default time zone offset (CET)
 String oledLanguage = "de";          // Default language for OLED ("de" = German)
 
 // Network and display objects
