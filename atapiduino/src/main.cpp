@@ -34,7 +34,6 @@
  ##########################################################################################
 */
 
-#include <arduino.h>
 #include <Wire.h>  // I2C bus library
 #include "main.h"
 
@@ -81,8 +80,8 @@ byte d_trck_s;
 byte d_trck_f;
 byte aud_stat = 0xFF;  // subchannel data: 0x11=play, 0x12=pause, 0x15=stop
 byte asc;
-long prev_millis = 0;
-long interval = 100;
+unsigned long prev_millis = 0;
+unsigned long interval = 100;
 boolean toc;
 
 // Array containing sets of 16 byte packets corresponding to part of the CD-ROM
@@ -197,7 +196,7 @@ void setup() {
         paclen = 16;              // 1st bit set -> use 16 byte packets
       }
     }
-    if (cnt > 26 & cnt < 47) {  // Read Model
+    if (cnt > 26 && cnt < 47) {  // Read Model
       Serial.print(dataHval);
       Serial.print(dataLval);
     }
@@ -281,8 +280,7 @@ void loop() {
     fnc[52] = d_trck_s;                          // in play packet and start play
     fnc[53] = d_trck_f;
     play();
-    if (aud_stat == 0x12 |  // If paused or stopped -> pause
-        aud_stat == 0x15) {
+    if (aud_stat == 0x12 || aud_stat == 0x15) {  // If paused or stopped -> pause
       pause();
     }
   }
@@ -295,7 +293,7 @@ void loop() {
     fnc[52] = d_trck_s;
     fnc[53] = d_trck_f;
     play();
-    if (aud_stat == 0x12 | aud_stat == 0x15) {
+    if (aud_stat == 0x12 || aud_stat == 0x15) {  // If paused or stopped -> pause
       pause();
     }
   }
@@ -310,10 +308,10 @@ void loop() {
       Serial.println("PAUSE");
       curr_MSF();
     }
-    if (aud_stat == 0x15 & !toc) {  // If stopped and TOC invalid
-      get_TOC();                    // try to read TOC
-      Disp_CD_data();               // display TOC data and set TOC valid
-      toc = true;                   // to prevent reading over and over
+    if (aud_stat == 0x15 && !toc) {  // If stopped and TOC invalid
+      get_TOC();                     
+      Disp_CD_data();               
+      toc = true;                    
     }
     if (aud_stat == 0x00) {       // Audio status 0 covers all other posible
                                   // states not decoded by this sketch and
@@ -546,8 +544,8 @@ void read_subch_cmd() {
   if (dataHval == 0x13) {  // Play operation successfully completed
     dataHval = 0x15;       // means drive is neither paused nor in play
   }                        // so treat as stopped
-  if (dataHval == 0x11 |   // playing
-      dataHval == 0x12 |   // paused
+  if (dataHval == 0x11 ||   // playing
+      dataHval == 0x12 ||   // paused
       dataHval == 0x15)    // stopped
   {
     aud_stat = dataHval;  //
@@ -577,7 +575,8 @@ byte chck_disk() {
   readIDE(DataReg);  // Read and discard Mode Sense data length
   readIDE(DataReg);  // Get Medium Type byte
                      // If valid audio disk present disk_ok=0x00
-  if (dataLval == 0x02 | dataLval == 0x06 | dataLval == 0x12 | dataLval == 0x16 | dataLval == 0x22 | dataLval == 0x26) {
+  if (dataLval == 0x02 || dataLval == 0x06 || dataLval == 0x12 || 
+      dataLval == 0x16 || dataLval == 0x22 || dataLval == 0x26) {
     disk_ok = 0x00;
   }
   if (dataLval == 0x71) {  // Note if door open
