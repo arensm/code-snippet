@@ -97,7 +97,7 @@ byte fnc[] = {
   0x4B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // idx=80 RESUME play
   0x43, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // idx=96 Read TOC
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // idx=112 unit ready
-  0x5A, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // idx=128 mode sense
+  0x5A, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // idx=128 mode sense
   0x42, 0x02, 0x40, 0x01, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // idx=144 rd subch.
   0x03, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  // idx=160 req. sense
   0x4E, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00   // idx=176 Stop disk
@@ -145,21 +145,23 @@ void setup() {
   Serial.println("Atapiduino");
   Serial.println("Release 3.1");
 
-  reset_IDE();       // Do hard reset
-  delay(3000);       // This delay waits for the drive to initialise
-  BSY_clear_wait();  // The ATAPI spec. allows drives to take up to
-  DRY_set_wait();    // 31 sec. but all tested where alright within 3s.
+  reset_IDE();       
+  delay(5000);       // Increased to 5 seconds for slower drives
+  BSY_clear_wait();  
+  DRY_set_wait();    
 
   readIDE(CylLReg);  // Check device signature for ATAPI capability
-  if (dataLval == 0x14) {
+  if (dataLval == 0x14 || dataLval == 0x69) {  // Added alternative signature
     readIDE(CylHReg);
-    if (dataLval == 0xEB) {
+    if (dataLval == 0xEB || dataLval == 0x96) { // Added alternative signature
       Serial.println("Found ATAPI Dev.");
+    } else {
+      Serial.println("Invalid ATAPI signature high byte");
+      while(1);
     }
   } else {
-    Serial.println("No ATAPI Device!");
-    while (1)
-      ;  // No need to go ahead.
+    Serial.println("Invalid ATAPI signature low byte");
+    while(1);
   }
   writeIDE(HeadReg, 0x00, 0xFF);  // Set Device to Master (Device 0)
 
@@ -187,22 +189,37 @@ void setup() {
   // Identify Device
   // ###############
   writeIDE(ComSReg, 0xA1, 0xFF);  // Issue Identify Device Command
-  delay(500);                     // Instead of wait for IRQ. Needed by some dev.
-                                  //  readIDE(AStCReg); //
+  delay(500);
+  
+  // Add timeout for identify command
+  unsigned long startTime = millis();
+  boolean timeout = false;
+  
   do {
     readIDE(DataReg);
-    if (cnt == 0) {               // Get supported packet lenght
-      if (dataLval & (1 << 0)) {  // contained in lower byte of first word
-        paclen = 16;              // 1st bit set -> use 16 byte packets
+    if (cnt == 0) {
+      if (dataLval & (1 << 0)) {
+        paclen = 16;
       }
     }
-    if (cnt > 26 && cnt < 47) {  // Read Model
+    if (cnt > 26 && cnt < 47) {
       Serial.print(dataHval);
       Serial.print(dataLval);
     }
     cnt++;
-    readIDE(ComSReg);             // Read Status Register and check DRQ,
-  } while (dataLval & (1 << 3));  // skip rest of data until DRQ=0
+    readIDE(ComSReg);
+    
+    // Add timeout check
+    if(millis() - startTime > 5000) {
+      timeout = true;
+      break;
+    }
+  } while (dataLval & (1 << 3));
+  
+  if(timeout) {
+    Serial.println("Identify Device Command timeout");
+    // Maybe try to recover here instead of hanging
+  }
   readIDE(AStCReg);
   DRQ_clear_wait();
 
@@ -410,6 +427,13 @@ void reset_IDE() {
   Wire.write((byte)B11111111);  // Release reset
   Wire.endTransmission();
   delay(20);
+  
+  // Add status check after reset
+  readIDE(AStCReg);
+  if(dataLval == 0xFF) {  // If all bits are 1, device might not be present
+    Serial.println("Device not responding after reset");
+    return;
+  }
 }
 
 // Read one word from IDE register
@@ -618,6 +642,24 @@ void init_task_file() {
   writeIDE(AStCReg, 0x02, 0xFF);  // Set nIEN, we don't care about the INTRQ signal
   BSY_clear_wait();               // When conditions are met then IDE bus is idle,
   DRQ_clear_wait();               // this check may not be necessary (???)
+}
+
+void checkDeviceStatus() {
+  readIDE(ComSReg);
+  byte status = dataLval;
+  
+  if(status & (1 << 0)) Serial.println("Error bit set");
+  if(status & (1 << 7)) Serial.println("Busy bit set");
+  if(status & (1 << 6)) Serial.println("Drive Ready");
+  if(status & (1 << 3)) Serial.println("Data Request set");
+  if(status & (1 << 4)) Serial.println("Seek complete");
+  
+  // Read error register if error bit is set
+  if(status & (1 << 0)) {
+    readIDE(ErrFReg);
+    Serial.print("Error register: 0x");
+    Serial.println(dataLval, HEX);
+  }
 }
 
 // END ####################################################################################
