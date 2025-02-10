@@ -1,5 +1,3 @@
-# code-snippet
+# esp32-kit-clock-ntp
 
-A noob with many things on his mind and ready for implementation thanks to AI coding
-
-Everything that goes around in my head goes in here!
+Darstellung der Uhrzeit auf einem ESP32-KIT

@@ -1,0 +1,13 @@
+// ESP-32-KIT-CLOCK NTP tested on "Heltec WiFi Kit 32"
+// 
+// is a ntp initialized date and time clock
+//
+// Before compiling and downloading the code, adjust the following settings:
+//
+//  1) currentTimeZone - currently set to +1 for Cologne Europe (my home state), adjust to your timezone.
+//  2) credentials.h   - currently set to "chSSID", adjust to your wifi ssid.
+//                     - currently set to "chPassword", adjust to your wifi password.
+//  3) oledLanguage    - default "de", change it to "en" for english OLED and webserver
+//
+// over http://YOUR_ESP_IP you can change language or timezone
+//  
