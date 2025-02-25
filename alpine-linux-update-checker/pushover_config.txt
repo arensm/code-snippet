@@ -1,0 +1,3 @@
+PUSHOVER_USER=your_user_key
+PUSHOVER_TOKEN=your_app_token
+

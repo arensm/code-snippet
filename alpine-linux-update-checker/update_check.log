@@ -1,0 +1,326 @@
+Tue Feb 25 15:34:51 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:34:51 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:34:52 UTC 2025: Fehler beim Abrufen von Updates für root@lms.lan!
+Tue Feb 25 15:34:52 UTC 2025: Server-Überprüfung abgeschlossen.
+Tue Feb 25 15:35:16 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:35:16 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:35:17 UTC 2025: Fehler beim Abrufen von Updates für root@lms.lan!
+Tue Feb 25 15:35:17 UTC 2025: Server-Überprüfung abgeschlossen.
+Tue Feb 25 15:36:29 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:36:29 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:36:29 UTC 2025: Fehler beim Abrufen von Updates für root@lms.lan!
+Tue Feb 25 15:36:29 UTC 2025: Server-Überprüfung abgeschlossen.
+Tue Feb 25 15:40:05 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:43:07 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:43:07 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:43:09 UTC 2025: Keine Updates verfügbar für root@lms.lan.
+Tue Feb 25 15:43:10 UTC 2025: Überprüfe Server: root@vdr.lan
+Tue Feb 25 15:43:14 UTC 2025: Server root@vdr.lan: Es sind 2 Updates verfügbar!
+Tue Feb 25 15:43:14 UTC 2025: Fehler beim Senden der Pushover-Nachricht: 
+Tue Feb 25 15:43:15 UTC 2025: Server-Überprüfung abgeschlossen.
+Tue Feb 25 15:44:33 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:44:33 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:44:34 UTC 2025: Keine Updates verfügbar für root@lms.lan.
+Tue Feb 25 15:44:35 UTC 2025: Überprüfe Server: root@vdr.lan
+Tue Feb 25 15:44:39 UTC 2025: Server root@vdr.lan: Es sind 2 Updates verfügbar!
+Tue Feb 25 15:44:40 UTC 2025: Fehler beim Senden der Pushover-Nachricht: 
+Tue Feb 25 15:44:41 UTC 2025: Server-Überprüfung abgeschlossen.
+Tue Feb 25 15:47:21 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:47:21 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:47:23 UTC 2025: Keine Updates verfügbar für root@lms.lan.
+Tue Feb 25 15:47:24 UTC 2025: Überprüfe Server: root@vdr.lan
+Tue Feb 25 15:47:28 UTC 2025: Server root@vdr.lan: Es sind 2 Updates verfügbar!
+Tue Feb 25 15:47:28 UTC 2025: Fehler beim Senden der Pushover-Nachricht: 
+Tue Feb 25 15:47:29 UTC 2025: Server-Überprüfung abgeschlossen.
+Tue Feb 25 15:48:05 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:48:05 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:48:07 UTC 2025: Keine Updates verfügbar für root@lms.lan.
+Tue Feb 25 15:48:08 UTC 2025: Überprüfe Server: root@vdr.lan
+Tue Feb 25 15:48:14 UTC 2025: Server root@vdr.lan: Es sind 2 Updates verfügbar!
+Tue Feb 25 15:48:15 UTC 2025: Fehler beim Senden der Pushover-Nachricht: {"status":1,"request":"aec48681-72d3-487d-b1f7-e1ae56bd6c24"}
+Tue Feb 25 15:48:16 UTC 2025: Server-Überprüfung abgeschlossen.
+Tue Feb 25 15:51:21 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:51:21 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:51:23 UTC 2025: Keine Updates verfügbar für root@lms.lan.
+Tue Feb 25 15:51:24 UTC 2025: Überprüfe Server: root@vdr.lan
+Tue Feb 25 15:51:28 UTC 2025: Server root@vdr.lan: Es sind 2 Updates verfügbar!
+Tue Feb 25 15:51:29 UTC 2025: Fehler beim Senden der Pushover-Nachricht: {"status":1,"request":"ee607820-fd83-4ff6-91e9-2d19ba9f0b9e"}
+Tue Feb 25 15:51:30 UTC 2025: Server-Überprüfung abgeschlossen.
+Tue Feb 25 15:52:37 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:52:37 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:52:39 UTC 2025: Keine Updates verfügbar für root@lms.lan.
+Tue Feb 25 15:52:40 UTC 2025: Überprüfe Server: root@vdr.lan
+Tue Feb 25 15:52:43 UTC 2025: Server root@vdr.lan: Es sind 2 Updates verfügbar!
+Tue Feb 25 15:52:44 UTC 2025: Pushover-Nachricht erfolgreich gesendet
+Tue Feb 25 15:52:45 UTC 2025: Server-Überprüfung abgeschlossen.
+Tue Feb 25 15:54:55 UTC 2025: Starte Server-Überprüfung...
+Tue Feb 25 15:54:55 UTC 2025: Überprüfe Server: root@lms.lan
+Tue Feb 25 15:54:57 UTC 2025: Keine Updates verfügbar für root@lms.lan.
+Tue Feb 25 15:54:58 UTC 2025: Überprüfe Server: root@vdr.lan
+Tue Feb 25 15:55:02 UTC 2025: Server root@vdr.lan: Es sind 2 Updates verfügbar!\n\nVerfügbare Updates:\nglib (2.82.4-r0 -> 2.82.5-r0)
+linux-lts (6.12.15-r0 -> 6.12.16-r0)
+Tue Feb 25 15:55:02 UTC 2025: Pushover-Nachricht erfolgreich gesendet
+Tue Feb 25 15:55:03 UTC 2025: Server-Überprüfung abgeschlossen.
+2025-02-25 15:56:14: Starte Server-Überprüfung...
+2025-02-25 15:56:14: ============================
+2025-02-25 15:56:14: Überprüfe Server: root@lms.lan
+2025-02-25 15:56:14: ----------------------------
+2025-02-25 15:56:16:   Keine Updates verfügbar für root@lms.lan.
+2025-02-25 15:56:16: ----------------------------
+2025-02-25 15:56:17: Überprüfe Server: root@vdr.lan
+2025-02-25 15:56:17: ----------------------------
+2025-02-25 15:56:20:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 15:56:21: Pushover-Nachricht erfolgreich gesendet
+2025-02-25 15:56:21: ----------------------------
+2025-02-25 15:56:22: ============================
+2025-02-25 15:56:22: Server-Überprüfung abgeschlossen.
+2025-02-25 15:57:58: Starte Server-Überprüfung...
+============================
+2025-02-25 15:57:58: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 15:58:00:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 15:58:01: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 15:58:05:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 15:58:05: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+============================
+2025-02-25 15:58:06: Server-Überprüfung abgeschlossen.
+2025-02-25 15:59:57: Starte Server-Überprüfung...
+============================
+2025-02-25 15:59:57: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 15:59:59:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 16:00:00: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 16:00:03:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 16:00:04: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+============================
+2025-02-25 16:00:05: Server-Überprüfung abgeschlossen.
+2025-02-25 16:01:37: Starte Server-Überprüfung...
+============================
+2025-02-25 16:01:37: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 16:01:38:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 16:01:39: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 16:01:43:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 16:01:44: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+============================
+2025-02-25 16:01:45: Server-Überprüfung abgeschlossen.
+2025-02-25 16:03:44: Starte Server-Überprüfung...
+============================
+2025-02-25 16:03:44: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 16:03:46:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 16:03:47: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 16:03:51:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 16:03:52: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+============================
+2025-02-25 16:03:53: Server-Überprüfung abgeschlossen.
+2025-02-25 16:06:46: Starte Server-Überprüfung...
+============================
+2025-02-25 16:06:46: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 16:06:48:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 16:06:49: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 16:06:52:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 16:06:53: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+2025-02-25 16:06:54: Überprüfe Server: root@gitea.lan
+----------------------------
+2025-02-25 16:06:54:   Fehler: apk nicht gefunden auf root@gitea.lan. Ist es ein Alpine Linux System?
+============================
+2025-02-25 16:06:54: Server-Überprüfung abgeschlossen.
+2025-02-25 16:07:19: Starte Server-Überprüfung...
+============================
+2025-02-25 16:07:19: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 16:07:20:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 16:07:21: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 16:07:25:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 16:07:25: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+2025-02-25 16:07:26: Überprüfe Server: root@gitea.lan
+----------------------------
+2025-02-25 16:07:26:   Fehler: apk nicht gefunden auf root@gitea.lan. Ist es ein Alpine Linux System?
+============================
+2025-02-25 16:07:26: Server-Überprüfung abgeschlossen.
+2025-02-25 16:08:12: Starte Server-Überprüfung...
+============================
+2025-02-25 16:08:12: Überprüfe Server: #root@lms.lan
+----------------------------
+2025-02-25 16:08:12:   Fehler: apk nicht gefunden auf #root@lms.lan. Ist es ein Alpine Linux System?
+2025-02-25 16:08:12: Überprüfe Server: #root@vdr.lan
+----------------------------
+2025-02-25 16:08:12:   Fehler: apk nicht gefunden auf #root@vdr.lan. Ist es ein Alpine Linux System?
+2025-02-25 16:08:12: Überprüfe Server: root@gitea.lan
+----------------------------
+2025-02-25 16:08:13:   Fehler: apk nicht gefunden auf root@gitea.lan. Ist es ein Alpine Linux System?
+============================
+2025-02-25 16:08:13: Server-Überprüfung abgeschlossen.
+2025-02-25 16:08:43: Starte Server-Überprüfung...
+============================
+2025-02-25 16:08:43: Überprüfe Server: root@gitea.lan
+----------------------------
+2025-02-25 16:08:43:   Fehler: apk nicht gefunden auf root@gitea.lan. Ist es ein Alpine Linux System?
+============================
+2025-02-25 16:08:43: Server-Überprüfung abgeschlossen.
+2025-02-25 16:09:52: Starte Server-Überprüfung...
+============================
+2025-02-25 16:09:52: Überprüfe Server: root@gitea.lan
+----------------------------
+2025-02-25 16:09:54:   Keine Updates verfügbar für root@gitea.lan.
+----------------------------
+============================
+2025-02-25 16:09:55: Server-Überprüfung abgeschlossen.
+2025-02-25 16:10:41: Starte Server-Überprüfung...
+============================
+2025-02-25 16:10:41: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 16:10:43:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 16:10:44: Überprüfe Server: root@gitea.lan
+----------------------------
+2025-02-25 16:10:46:   Keine Updates verfügbar für root@gitea.lan.
+----------------------------
+2025-02-25 16:10:47: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 16:10:51:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 16:10:52: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+============================
+2025-02-25 16:10:53: Server-Überprüfung abgeschlossen.
+2025-02-25 16:11:47: Starte Server-Überprüfung...
+============================
+2025-02-25 16:11:47: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 16:11:49:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 16:11:50: Überprüfe Server: root@gitea.lan
+----------------------------
+2025-02-25 16:11:52:   Keine Updates verfügbar für root@gitea.lan.
+----------------------------
+2025-02-25 16:11:53: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 16:11:57:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 16:11:57: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+2025-02-25 16:11:58: Überprüfe Server: root@vavoo.lan
+----------------------------
+2025-02-25 16:12:00:   Keine Updates verfügbar für root@vavoo.lan.
+----------------------------
+============================
+2025-02-25 16:12:01: Server-Überprüfung abgeschlossen.
+2025-02-25 16:12:50: Starte Server-Überprüfung...
+============================
+2025-02-25 16:12:50: Überprüfe Server: root@usenet.lan
+----------------------------
+2025-02-25 16:12:53:   Keine Updates verfügbar für root@usenet.lan.
+----------------------------
+2025-02-25 16:12:54: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 16:14:12: Starte Server-Überprüfung...
+============================
+2025-02-25 16:14:12: Überprüfe Server: root@mariadb.lan
+----------------------------
+2025-02-25 16:14:14:   Keine Updates verfügbar für root@mariadb.lan.
+----------------------------
+2025-02-25 16:14:15: Überprüfe Server: root@raspberrymatic.lan
+----------------------------
+2025-02-25 16:14:17:   Keine Updates verfügbar für root@raspberrymatic.lan.
+----------------------------
+2025-02-25 16:14:18: Überprüfe Server: root@usenet.lan
+----------------------------
+2025-02-25 16:14:20:   Keine Updates verfügbar für root@usenet.lan.
+----------------------------
+2025-02-25 16:14:21: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 16:14:22:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 16:14:23: Überprüfe Server: root@gitea.lan
+----------------------------
+2025-02-25 16:14:25:   Keine Updates verfügbar für root@gitea.lan.
+----------------------------
+2025-02-25 16:14:26: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 16:14:30:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 16:14:31: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+2025-02-25 16:14:32: Überprüfe Server: root@vavoo.lan
+----------------------------
+2025-02-25 16:14:33:   Keine Updates verfügbar für root@vavoo.lan.
+----------------------------
+============================
+2025-02-25 16:14:34: Server-Überprüfung abgeschlossen.
+2025-02-25 16:15:31: Starte Server-Überprüfung...
+============================
+2025-02-25 16:15:31: Überprüfe Server: root@mqtt-broker.lan
+----------------------------
+2025-02-25 16:15:33:   Keine Updates verfügbar für root@mqtt-broker.lan.
+----------------------------
+2025-02-25 16:15:34: Überprüfe Server: root@mariadb.lan
+----------------------------
+2025-02-25 16:15:36:   Keine Updates verfügbar für root@mariadb.lan.
+----------------------------
+2025-02-25 16:15:37: Überprüfe Server: root@raspberrymatic.lan
+----------------------------
+2025-02-25 16:15:39:   Keine Updates verfügbar für root@raspberrymatic.lan.
+----------------------------
+2025-02-25 16:15:40: Überprüfe Server: root@usenet.lan
+----------------------------
+2025-02-25 16:15:42:   Keine Updates verfügbar für root@usenet.lan.
+----------------------------
+2025-02-25 16:15:43: Überprüfe Server: root@lms.lan
+----------------------------
+2025-02-25 16:15:45:   Keine Updates verfügbar für root@lms.lan.
+----------------------------
+2025-02-25 16:15:46: Überprüfe Server: root@gitea.lan
+----------------------------
+2025-02-25 16:15:49:   Keine Updates verfügbar für root@gitea.lan.
+----------------------------
+2025-02-25 16:15:50: Überprüfe Server: root@vdr.lan
+----------------------------
+2025-02-25 16:15:53:   2 Updates verfügbar:
+    - glib ((2.82.4-r0 -> 2.82.5-r0))
+    - linux-lts ((6.12.15-r0 -> 6.12.16-r0))
+2025-02-25 16:15:54: Pushover-Nachricht erfolgreich gesendet
+----------------------------
+2025-02-25 16:15:55: Überprüfe Server: root@vavoo.lan
+----------------------------
+2025-02-25 16:15:57:   Keine Updates verfügbar für root@vavoo.lan.
+----------------------------
+============================
+2025-02-25 16:15:58: Server-Überprüfung abgeschlossen.
