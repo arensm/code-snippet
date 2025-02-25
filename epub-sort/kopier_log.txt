@@ -1,0 +1,43 @@
+Starte Kopiervorgang: Mi 19 Feb 2025 14:14:38 CET
+HAUPTVERZEICHNIS: /Volumes/DISKSTATION/FREIGABE/Kodi_Media_Libary/usenet_data/sabnzbd/00/download
+ZIELVERZEICHNIS: /Volumes/DISKSTATION/FREIGABE/Kodi_Media_Libary/usenet_data/sabnzbd/00/sortiert
+Verarbeite Datei: Campino - Hope Street.epub
+Fehler beim Extrahieren von Autoren und Titel aus Campino - Hope Street.epub
+Kopiere Campino - Hope Street.epub in Prüfverzeichnis
+Verarbeite Datei: Campino - Hope Street.epub
+Fehler beim Extrahieren von Autoren und Titel aus Campino - Hope Street.epub
+Kopiere Campino - Hope Street.epub in Prüfverzeichnis
+Verarbeite Datei: Campino - Hope Street.epub
+Fehler beim Extrahieren von Autoren und Titel aus Campino - Hope Street.epub
+Kopiere Campino - Hope Street.epub in Prüfverzeichnis
+Verarbeite Datei: Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Fehler beim Extrahieren von Autoren und Titel aus Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Kopiere Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub in Prüfverzeichnis
+Verarbeite Datei: Campino - Hope Street.epub
+Fehler beim Extrahieren von Autoren und Titel aus Campino - Hope Street.epub
+Kopiere Campino - Hope Street.epub in Prüfverzeichnis
+Verarbeite Datei: Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Fehler beim Extrahieren von Autoren und Titel aus Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Kopiere Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub in Prüfverzeichnis
+Verarbeite Datei: Campino - Hope Street.epub
+Fehler beim Extrahieren von Autoren und Titel aus Campino - Hope Street.epub
+Kopiere Campino - Hope Street.epub in Prüfverzeichnis
+Verarbeite Datei: Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Fehler beim Extrahieren von Autoren und Titel aus Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Kopiere Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub in Prüfverzeichnis
+Verarbeite Datei: Campino - Hope Street.epub
+Fehler beim Extrahieren von Autoren und Titel aus Campino - Hope Street.epub
+Kopiere Campino - Hope Street.epub in Prüfverzeichnis
+Verarbeite Datei: Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Fehler beim Extrahieren von Autoren und Titel aus Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Kopiere Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub in Prüfverzeichnis
+Verarbeite Datei: Campino - Hope Street.epub
+Fehler beim Extrahieren von Autoren und Titel aus Campino - Hope Street.epub
+Kopiere Campino - Hope Street.epub in Prüfverzeichnis
+Verarbeite Datei: Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Fehler beim Extrahieren von Autoren und Titel aus Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub
+Kopiere Cilla & Rolf Börjlind - Rönning & Stilton 06 - Kaltes Gold.epub in Prüfverzeichnis
+Verarbeite Datei: Campino - Hope Street.epub
+Fehler beim Extrahieren von Autoren und Titel aus Campino - Hope Street.epub
+Kopiere Campino - Hope Street.epub in Prüfverzeichnis
+Fertig! Alle .epub-Dateien wurden sortiert und kopiert.
