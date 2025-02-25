@@ -1,0 +1,86 @@
+# Alpine Linux Update Checker
+
+## Description
+This script checks multiple Alpine Linux servers for available updates and sends notifications via Pushover. It's designed to help system administrators keep their Alpine Linux servers up to date by providing regular update notifications.
+
+## Features
+- Checks multiple servers defined in a list
+- Logs all activities and findings
+- Sends Pushover notifications for servers with available updates
+- Supports custom configuration for Pushover credentials
+
+## Requirements
+- Shell environment (sh or bash)
+- SSH access to the servers (passwordless authentication recommended)
+- wget for sending Pushover notifications
+- Pushover account and API credentials
+
+## Setup
+1. Create a file named `server_list.txt` with the list of servers to check (one per line)
+2. Create a file named `pushover_config.txt` with your Pushover credentials:
+
+PUSHOVER_USER=your_user_key
+PUSHOVER_TOKEN=your_app_token
+
+3. Ensure the script has execute permissions: `chmod +x update_checker.sh`
+
+## Usage
+Run the script with:
+
+./update_checker.sh
+
+
+## Output
+- Console output and log file (`update_check.log`) with detailed information
+- Pushover notifications for servers with available updates
+
+## Customization
+- Modify the script to change log file names, check intervals, or add additional checks as needed
+
+## Note
+Ensure that the user running this script has the necessary SSH permissions to access all servers in the list.
+
+
+# Alpine Linux Update-Prüfer
+
+## Beschreibung
+Dieses Skript überprüft mehrere Alpine Linux Server auf verfügbare Updates und sendet Benachrichtigungen über Pushover. Es wurde entwickelt, um Systemadministratoren dabei zu unterstützen, ihre Alpine Linux Server durch regelmäßige Update-Benachrichtigungen auf dem neuesten Stand zu halten.
+
+## Funktionen
+- Überprüft mehrere Server, die in einer Liste definiert sind
+- Protokolliert alle Aktivitäten und Ergebnisse
+- Sendet Pushover-Benachrichtigungen für Server mit verfügbaren Updates
+- Unterstützt benutzerdefinierte Konfiguration für Pushover-Zugangsdaten
+
+## Voraussetzungen
+- Shell-Umgebung (sh oder bash)
+- SSH-Zugriff auf die Server (passwortlose Authentifizierung empfohlen)
+- wget zum Senden von Pushover-Benachrichtigungen
+- Pushover-Konto und API-Zugangsdaten
+
+## Einrichtung
+1. Erstellen Sie eine Datei namens `server_list.txt` mit der Liste der zu überprüfenden Server (einer pro Zeile)
+2. Erstellen Sie eine Datei namens `pushover_config.txt` mit Ihren Pushover-Zugangsdaten:
+
+PUSHOVER_USER=ihr_benutzer_schlüssel
+PUSHOVER_TOKEN=ihr_app_token
+
+3. Stellen Sie sicher, dass das Skript Ausführungsberechtigungen hat: `chmod +x update_checker.sh`
+
+## Verwendung
+Führen Sie das Skript aus mit:
+
+./update_checker.sh
+
+
+## Ausgabe
+- Konsolenausgabe und Protokolldatei (`update_check.log`) mit detaillierten Informationen
+- Pushover-Benachrichtigungen für Server mit verfügbaren Updates
+
+## Anpassung
+- Modifizieren Sie das Skript, um Protokolldateinamen, Prüfintervalle zu ändern oder zusätzliche Prüfungen nach Bedarf hinzuzufügen
+
+## Hinweis
+Stellen Sie sicher, dass der Benutzer, der dieses Skript ausführt, die erforderlichen SSH-Berechtigungen hat, um auf alle Server in der Liste zuzugreifen.
+
+
