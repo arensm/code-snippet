@@ -1,10 +1,10 @@
 /******************************************************
- * ESP12F_Relay_X4 – 4 Relais per Web
- * + OTA-Update
+ * ESP12F_Relay_X4 – 4 Relais per Web + OTA-Update (Progress)
  * + Version Info + Reboot/Reachability-Check (Polling /about)
  * + WiFiManager AutoConnect AP "ESP12F_Relay_X4"
- * + API Call for HomeAssistant
  * 
+ * DE: Diese Version nutzt WiFiManager; feste SSID/Passwort entfallen.
+ * EN: This version uses WiFiManager; fixed SSID/password removed.
  ******************************************************/
 
 #include <ESP8266WiFi.h>                 // DE: WLAN-Basis für ESP8266 / EN: WiFi core for ESP8266
@@ -24,16 +24,16 @@ const char* HOSTNAME = "esp-terrasse";   // DE: Hostname (nur a-z0-9-) / EN: Hos
 // EN: Removed fixed credentials – WiFiManager handles connect/portal.
 
 // ---------- Firmware-Metadaten ----------
-const char* FW_NAME    = HOSTNAME;              // DE: Anzeigename = Hostname / EN: Display name = hostname
-const char* FW_VERSION = "3.0.0";               // DE: Version angehoben für WiFiManager-Integration / EN: Bumped for WiFiManager integration
-const char* FW_BUILD   = __DATE__ " " __TIME__; // DE: Kompilierzeit / EN: Compile timestamp
+const char* FW_NAME    = HOSTNAME;                // DE: Anzeigename = Hostname / EN: Display name = hostname
+const char* FW_VERSION = "1.0.0";                 // DE: Version angehoben für WiFiManager-Integration / EN: Bumped for WiFiManager integration
+const char* FW_BUILD   = __DATE__ " " __TIME__;   // DE: Kompilierzeit / EN: Compile timestamp
 
 // ---------- OTA-Login ----------
-const char* update_username = "adminesp";   // DE: ändern! / EN: change!
-const char* update_password = "adminesp";   // DE: ändern! / EN: change!
+const char* update_username = "esp-admin";   // DE: ändern! / EN: change!
+const char* update_password = "esp-admin";   // DE: ändern! / EN: change!
 
 // ---------- Relais-Logik ----------
-const bool ACTIVE_LOW = false;           // DE: Falls Relais Low-aktiv sind / EN: If relays are active-low
+const bool ACTIVE_LOW = false;                                          // DE: Falls Relais Low-aktiv sind / EN: If relays are active-low
 #define RELAY_ON(pin)   digitalWrite((pin), ACTIVE_LOW ? LOW  : HIGH)   // DE: Relais EIN / EN: Relay ON
 #define RELAY_OFF(pin)  digitalWrite((pin), ACTIVE_LOW ? HIGH : LOW)    // DE: Relais AUS / EN: Relay OFF
 
@@ -70,9 +70,9 @@ String makeStateJson() {                         // DE: Kompaktes Status-JSON / 
 }
 
 // ---------- JSON & CORS Utilities ----------
-void sendJson(int code, const String& body) {    // DE: JSON senden mit CORS / EN: send JSON with CORS
-  server.sendHeader("Access-Control-Allow-Origin", "*"); // DE: CORS / EN: CORS
-  server.sendHeader("Cache-Control", "no-store");        // DE: Kein Cache / EN: no cache
+void sendJson(int code, const String& body) {                 // DE: JSON senden mit CORS / EN: send JSON with CORS
+  server.sendHeader("Access-Control-Allow-Origin", "*");      // DE: CORS / EN: CORS
+  server.sendHeader("Cache-Control", "no-store");             // DE: Kein Cache / EN: no cache
   server.send(code, "application/json; charset=utf-8", body); // DE: Antwort / EN: response
 }
 
@@ -242,10 +242,18 @@ String fwPage() {                              // DE: OTA-Webseite / EN: OTA web
       "const xhr=new XMLHttpRequest();xhr.open('POST','/update',true);"
       "xhr.upload.onprogress=function(e){if(e.lengthComputable){const p=Math.round(e.loaded/e.total*100);setBar(p);status.textContent='Upload: '+p+'%';}};"
       "xhr.onreadystatechange=function(){if(xhr.readyState===4){if(xhr.status===200){"
-        "status.textContent+='\\nUpdate erfolgreich. Neustart wird ausgeführt…';"
-        "setBar(100);"
-        "setTimeout(()=>pollBack(90000), 1500);"
-      "}else{status.textContent='Fehler: '+xhr.status+' '+xhr.responseText; disableUI(false);}}};"
+      "status.textContent+='\\nUpdate erfolgreich. Neustart wird ausgeführt…';"
+      "setBar(100);"
+      "setTimeout(()=>pollBack(90000), 1500);"
+      "}else if (xhr.status===401){"
+      "status.textContent='401 Unauthorized – bitte einmal auf /update einloggen, dann erneut versuchen.';"
+      "window.open('/update','_blank');"
+      "disableUI(false);"
+      "}else{"
+      "status.textContent='Fehler: '+xhr.status+' '+xhr.responseText;"
+      "disableUI(false);"
+      "}}};"
+
       "status.textContent='Starte Upload…';"
       "xhr.send(fd);"
     "};"
@@ -266,6 +274,32 @@ void toggleRelay(uint8_t idx) { setRelay(idx, !state[idx]); } // DE/EN: toggle
 // ---------- Setup ----------
 void setup() {                                   // DE: Initialisierung / EN: initialization
   Serial.begin(115200);                          // DE/EN: serial debug
+  Serial.setDebugOutput(true);  // DE: Kernel/WiFi-Debug auf die serielle Ausgabe legen
+                                // EN: Route kernel/WiFi debug to the serial output
+  // DE: Diagnoseausgabe für Flash-/OTA-Layout – hilft, OTA-Probleme schnell zu erkennen.
+  // EN: Diagnostic printout for flash/OTA layout – quickly reveals OTA configuration issues.
+  Serial.printf(
+    "Flash real:%u, ide:%u, sketch:%u, free:%u\n",   // DE: Formatstring: reale Flashgröße, IDE-konfigurierte Größe, Sketch-Größe, freier OTA-Speicher
+                                                      // EN: Format string: real flash size, IDE-configured size, sketch size, free OTA space
+    ESP.getFlashChipRealSize(),                       // DE: Tatsächliche physische Flashgröße (z. B. 4194304 = 4 MB)
+                                                      // EN: Actual physical flash size (e.g., 4194304 = 4 MB)
+    ESP.getFlashChipSize(),                           // DE: Von der Toolchain/IDE erwartete Flashgröße – muss 'real' entsprechen
+                                                      // EN: Flash size expected by toolchain/IDE – must match 'real'
+    ESP.getSketchSize(),                              // DE: Größe des aktuell laufenden Sketches (Bytes)
+                                                      // EN: Size of the currently running sketch (bytes)
+    ESP.getFreeSketchSpace()                          // DE: Freier Platz für OTA-Sketch (Bytes) – neue .bin muss kleiner sein
+                                                      // EN: Free space available for OTA sketch (bytes) – new .bin must be smaller
+  );
+
+// DE: Warnung ausgeben, wenn IDE-Flashgröße nicht zur realen Chipgröße passt (häufige OTA-Ursache).
+// EN: Warn if IDE flash size does not match the real chip size (common OTA failure cause).
+if (ESP.getFlashChipRealSize() != ESP.getFlashChipSize()) {
+  Serial.println(
+    "WARN: IDE flash size mismatch -> Tools/Flash Size auf 4M stellen!" // DE: Hinweis zur Korrektur in der Arduino-IDE
+                                                                         // EN: Hint to fix settings in Arduino IDE (set Flash Size to 4M)
+  );
+}
+
   Serial.println();                              // DE/EN: newline
   Serial.println(F("ESP12F_Relay_X4 starting (OTA+Progress+Poll+WiFiManager)…")); // DE/EN: banner
 
@@ -301,6 +335,11 @@ void setup() {                                   // DE: Initialisierung / EN: in
 
   // --- OTA Updater ---
   httpUpdater.setup(&server,"/update",update_username,update_password); // DE: /update mit Basic-Auth / EN: /update basic auth
+  // DE: OTA-Progress auf der Seriellen (optional).
+  // EN: Serial progress for OTA (optional).
+  Update.onProgress([](size_t cur, size_t total){
+    Serial.printf("OTA: %u / %u bytes\r\n", (unsigned)cur, (unsigned)total);
+  });
 
   // ---------- Web UI ----------
   server.on("/",[](){ server.send(200,"text/html; charset=utf-8",page()); }); // DE/EN: root page
@@ -326,7 +365,14 @@ void setup() {                                   // DE: Initialisierung / EN: in
   });
 
   server.on("/about",[](){ server.send(200,"application/json; charset=utf-8",makeAboutJson()); }); // DE/EN: about JSON
-  server.on("/fw",[](){ server.send(200,"text/html; charset=utf-8",fwPage()); });                  // DE/EN: fw page
+  // DE: /fw nur nach Login ausliefern, damit Browser Basic-Auth-Creds cachen.
+  // EN: Protect /fw so the browser caches Basic-Auth creds for later XHR to /update.
+  server.on("/fw", [](){
+    if (!server.authenticate(update_username, update_password)) {
+      return server.requestAuthentication(); // DE: Browser-Login-Popup / EN: login prompt
+    }
+  server.send(200, "text/html; charset=utf-8", fwPage());
+  }); 
 
   // ---------- Lightweight JSON state ----------
   server.on("/state", [](){                       // DE: Schnellstatus / EN: quick status
