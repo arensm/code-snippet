@@ -7,6 +7,7 @@
  * EN: This version uses WiFiManager; fixed SSID/password removed.
  ******************************************************/
 
+
 #include <ESP8266WiFi.h>                 // DE: WLAN-Basis für ESP8266 / EN: WiFi core for ESP8266
 #include <ESP8266WebServer.h>            // DE: Einfache HTTP-Server-API / EN: Simple HTTP server API
 #include <ESP8266mDNS.h>                 // DE: mDNS (hostname.local) / EN: mDNS (hostname.local)
