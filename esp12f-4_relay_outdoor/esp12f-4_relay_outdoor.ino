@@ -5,9 +5,11 @@
  * 
  * DE: Diese Version nutzt WiFiManager; feste SSID/Passwort entfallen.
  * EN: This version uses WiFiManager; fixed SSID/password removed.
+ * 
+ * Board: NodeMCU 1.0 (ESP-12E Module)
  ******************************************************/
 
-
+#include <Arduino.h>
 #include <ESP8266WiFi.h>                 // DE: WLAN-Basis für ESP8266 / EN: WiFi core for ESP8266
 #include <ESP8266WebServer.h>            // DE: Einfache HTTP-Server-API / EN: Simple HTTP server API
 #include <ESP8266mDNS.h>                 // DE: mDNS (hostname.local) / EN: mDNS (hostname.local)
@@ -26,7 +28,7 @@ const char* HOSTNAME = "esp-terrasse";   // DE: Hostname (nur a-z0-9-) / EN: Hos
 
 // ---------- Firmware-Metadaten ----------
 const char* FW_NAME    = HOSTNAME;                // DE: Anzeigename = Hostname / EN: Display name = hostname
-const char* FW_VERSION = "1.0.0";                 // DE: Version angehoben für WiFiManager-Integration / EN: Bumped for WiFiManager integration
+const char* FW_VERSION = "1.0.1";                 // DE: Version angehoben für WiFiManager-Integration / EN: Bumped for WiFiManager integration
 const char* FW_BUILD   = __DATE__ " " __TIME__;   // DE: Kompilierzeit / EN: Compile timestamp
 
 // ---------- OTA-Login ----------
