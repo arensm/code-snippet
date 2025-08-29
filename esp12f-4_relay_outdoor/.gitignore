@@ -2,3 +2,5 @@
 .vscode/*
 .pushover_config.txt
 .server_list.txt
+.build/*/*.elf
+.build/*/*.map
