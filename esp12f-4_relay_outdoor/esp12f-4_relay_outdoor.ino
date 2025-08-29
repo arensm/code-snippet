@@ -2,6 +2,7 @@
  * ESP12F_Relay_X4 – 4 Relais per Web + OTA-Update (Progress)
  * + Version Info + Reboot/Reachability-Check (Polling /about)
  * + WiFiManager AutoConnect AP "ESP12F_Relay_X4"
+ * + WiFi Credential clear /wifi/reset
  * 
  * DE: Diese Version nutzt WiFiManager; feste SSID/Passwort entfallen.
  * EN: This version uses WiFiManager; fixed SSID/password removed.
@@ -23,8 +24,8 @@ ESP8266HTTPUpdateServer httpUpdater;     // DE: OTA-Update-Endpunkt / EN: OTA up
 
 // ---------- WLAN ----------
 const char* HOSTNAME = "esp-terrasse";   // DE: Hostname (nur a-z0-9-) / EN: Hostname (lowercase, digits, hyphen)
-// DE: Feste Zugangsdaten entfernt – WiFiManager übernimmt Verbindung/Portal.
-// EN: Removed fixed credentials – WiFiManager handles connect/portal.
+// DE: WiFiManager übernimmt Verbindung/Portal.
+// EN: WiFiManager handles connect/portal.
 
 // ---------- Firmware-Metadaten ----------
 const char* FW_NAME    = HOSTNAME;                // DE: Anzeigename = Hostname / EN: Display name = hostname
@@ -34,6 +35,12 @@ const char* FW_BUILD   = __DATE__ " " __TIME__;   // DE: Kompilierzeit / EN: Com
 // ---------- OTA-Login ----------
 const char* update_username = "esp-admin";   // DE: ändern! / EN: change!
 const char* update_password = "esp-admin";   // DE: ändern! / EN: change!
+
+// ---------- WiFi Reset (deferred) ----------
+// DE: Zur sicheren Ausführung nach HTTP-Antwort planen
+// EN: Defer execution until after HTTP response
+volatile bool WIFI_RESET_PENDING = false;        // DE: Marker für ausstehenden Reset / EN: pending marker
+unsigned long WIFI_RESET_AT_MS = 0;              // DE: Zeitpunkt der Ausführung / EN: when to execute
 
 // ---------- Relais-Logik ----------
 const bool ACTIVE_LOW = false;                                          // DE: Falls Relais Low-aktiv sind / EN: If relays are active-low
@@ -172,6 +179,7 @@ String page() {                                // DE: HTML-UI / EN: HTML UI
     "<div class='row'>"
     "<a class='link' href='/fw'>🔁 Firmware-Update</a>"
     "<a class='link' href='/about'>ℹ️ System-Info (JSON)</a>"
+    "<a class='link' href='/wifi'>📶 WLAN clear</a>"
     "</div>"
     "<div class='foot'>R1=GPIO16, R2=GPIO14, R3=GPIO12, R4=GPIO13"
     "<br>Hinweis: R1 (GPIO16) kann beim Start kurz einschalten.</div>"
@@ -262,6 +270,38 @@ String fwPage() {                              // DE: OTA-Webseite / EN: OTA web
     "};"
     "</script></body></html>";
   return s;                                      // DE/EN: return
+}
+
+// ---------- WLAN-Seite mit Reset-Button ----------
+String wifiPage() {                              // DE: WLAN-UI / EN: WiFi UI
+  String ssid = WiFi.SSID();                     // DE: Aktuelle SSID / EN: current SSID
+  String ip   = WiFi.localIP().toString();       // DE: Aktuelle IP   / EN: current IP
+
+  String s =
+    "<!DOCTYPE html><html><head><meta charset='utf-8'>"
+    "<meta name='viewport' content='width=device-width,initial-scale=1'>"
+    "<title>WLAN</title>"
+    "<style>"
+    "body{font-family:system-ui,Arial;max-width:640px;margin:24px auto;padding:0 12px}"
+    "h1{font-size:1.4rem;margin:0 0 .5rem}"
+    ".card{border:1px solid #ddd;border-radius:12px;padding:16px}"
+    "button{padding:10px 14px;border-radius:10px;border:1px solid #c00;background:#fee;color:#900;cursor:pointer}"
+    "a{color:#06f;text-decoration:none}"
+    ".muted{color:#666}"
+    "</style></head><body>"
+    "<h1>WLAN</h1>"
+    "<div class='card'>"
+      "<div class='muted'>Verbunden mit: <b>" + ssid + "</b> &bull; IP: " + ip + "</div>"
+      "<p><b>Wichtig:</b> Das Löschen der Zugangsdaten trennt die Verbindung und startet das Gerät neu."
+      "<br>Nach dem Neustart erscheint ein Access Point <code>ESP12F_Relay_X4</code> (WiFiManager-Portal).</p>"
+      "<form method='post' action='/wifi/reset' "
+      "onsubmit='return confirm(\"Zugangsdaten löschen und neu starten?\\nWiFiManager-Portal erscheint nach dem Boot.\");'>"
+        "<button type='submit'>WiFi-Zugangsdaten löschen & Neustarten</button> "
+        "<a href='/'>&larr; Zurück</a>"
+      "</form>"
+    "</div>"
+    "</body></html>";
+  return s;                                       // DE/EN: return
 }
 
 // ---------- Relaisfunktionen ----------
@@ -377,6 +417,48 @@ if (ESP.getFlashChipRealSize() != ESP.getFlashChipSize()) {
   server.send(200, "text/html; charset=utf-8", fwPage());
   }); 
 
+  // --- WLAN-Menü (Basic-Auth wie /fw) ---
+  server.on("/wifi", HTTP_GET, [](){              // DE: WLAN-Menü / EN: WiFi menu
+    if (!server.authenticate(update_username, update_password)) {
+      return server.requestAuthentication();      // DE/EN: login prompt
+    }
+    server.send(200, "text/html; charset=utf-8", wifiPage()); // DE/EN: send page
+  });
+
+  // --- WLAN-Reset: HTML-Button-Submit ---
+  server.on("/wifi/reset", HTTP_OPTIONS, [](){ sendCorsPreflight(); }); // DE/EN: CORS
+  server.on("/wifi/reset", HTTP_POST, [](){     // DE: Reset via Formular / EN: reset via form
+    if (!server.authenticate(update_username, update_password)) {
+      return server.requestAuthentication();     // DE/EN: protect action
+    }
+    // DE: Bestätigungsseite noch senden, dann deferred Reset / EN: send confirmation page, then deferred reset
+    String resp =
+      "<!DOCTYPE html><html><head><meta charset='utf-8'>"
+      "<meta name='viewport' content='width=device-width,initial-scale=1'>"
+      "<title>WLAN-Reset</title></head><body>"
+      "<h1>WLAN-Reset ausgelöst</h1>"
+      "<p>Zugangsdaten werden gelöscht, Gerät startet gleich neu…</p>"
+      "<p>Nach dem Boot erscheint der AP <code>ESP12F_Relay_X4</code> (WiFiManager-Portal).</p>"
+      "<p><em>Diese Seite wird nicht automatisch neu geladen.</em></p>"
+      "</body></html>";
+    server.send(200, "text/html; charset=utf-8", resp);
+
+    WIFI_RESET_PENDING = true;                   // DE: Reset vormerken / EN: schedule
+    WIFI_RESET_AT_MS = millis() + 800;           // DE: kurze Verzögerung / EN: small delay
+  });
+
+  // --- API-Variante (JSON), ebenfalls geschützt ---
+  server.on("/api/wifi/reset", HTTP_OPTIONS, [](){ sendCorsPreflight(); }); // DE/EN: CORS
+  server.on("/api/wifi/reset", HTTP_POST, [](){  // DE: Reset via Fetch/XHR / EN: reset via fetch/xhr
+    if (!server.authenticate(update_username, update_password)) {
+      return server.requestAuthentication();     // DE/EN: protect
+    }
+    sendJson(200, "{\"ok\":true,\"message\":\"Erasing WiFi credentials; rebooting shortly\"}");
+    WIFI_RESET_PENDING = true;                   // DE/EN: schedule
+    WIFI_RESET_AT_MS = millis() + 800;           // DE/EN: small delay
+  });
+
+
   // ---------- Lightweight JSON state ----------
   server.on("/state", [](){                       // DE: Schnellstatus / EN: quick status
     server.send(200, "application/json; charset=utf-8", makeStateJson()); // DE/EN: send
@@ -454,4 +536,19 @@ if (ESP.getFlashChipRealSize() != ESP.getFlashChipSize()) {
 void loop() {                                      // DE: Hauptschleife / EN: main loop
   server.handleClient();                           // DE: HTTP bedienen / EN: handle HTTP
   MDNS.update();                                   // DE: mDNS warten / EN: service mDNS
+
+  // --- Deferred WiFi-Credential-Reset & Reboot ---
+  if (WIFI_RESET_PENDING && (long)(millis() - WIFI_RESET_AT_MS) >= 0) {  // DE: Zeit erreicht? / EN: time reached?
+    WIFI_RESET_PENDING = false;                   // DE: Marker zurücksetzen / EN: clear marker
+    Serial.println(F("WiFi RESET via Web: erase credentials & reboot")); // DE/EN: log
+
+    // DE: Einstellungen sicher löschen (WiFiManager) / EN: clear credentials safely (WiFiManager)
+    WiFi.mode(WIFI_OFF);                          // DE: WLAN kurz aus / EN: turn wifi off briefly
+    delay(50);                                    // DE/EN: settle
+    WiFiManager wm;                               // DE: temporäres Objekt / EN: temp object
+    wm.resetSettings();                           // DE: SDK-/Flash-Creds löschen / EN: erase SDK/flash creds
+
+    delay(200);                                   // DE/EN: small grace
+    ESP.restart();                                // DE: Neustart / EN: reboot
+  }
 }
