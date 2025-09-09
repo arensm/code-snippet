@@ -1,6 +1,6 @@
-# esp-front
+# esp-front-old
 
-## old board
+## an old board with fucking tuya code
 
 ESP8285_Relay_X4 – 4 Relais per Web + OTA-Update
 
