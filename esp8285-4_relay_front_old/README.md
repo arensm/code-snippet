@@ -21,3 +21,5 @@ RX 21 ---> TX
 GPI00 ---> GND (connect for first flash)
 
 connect board with USB 5V
+
+![Bild](pic/webif.jpg)
