@@ -1,0 +1,6 @@
+.pio/*
+.vscode/*
+.pushover_config.txt
+.server_list.txt
+.build/esp8266.esp8266.esp8285/*.elf
+.build/esp8266.esp8266.esp8285/*.map

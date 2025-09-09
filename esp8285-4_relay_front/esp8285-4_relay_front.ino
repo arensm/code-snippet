@@ -23,13 +23,13 @@ ESP8266WebServer server(80);             // DE: HTTP-Server auf Port 80 / EN: HT
 ESP8266HTTPUpdateServer httpUpdater;     // DE: OTA-Update-Endpunkt / EN: OTA update endpoint
 
 // ---------- WLAN ----------
-const char* HOSTNAME = "esp-terrasse";   // DE: Hostname (nur a-z0-9-) / EN: Hostname (lowercase, digits, hyphen)
+const char* HOSTNAME = "esp-front";   // DE: Hostname (nur a-z0-9-) / EN: Hostname (lowercase, digits, hyphen)
 // DE: WiFiManager übernimmt Verbindung/Portal.
 // EN: WiFiManager handles connect/portal.
 
 // ---------- Firmware-Metadaten ----------
 const char* FW_NAME    = HOSTNAME;                // DE: Anzeigename = Hostname / EN: Display name = hostname
-const char* FW_VERSION = "1.0.2";                 // DE: Version angehoben für WiFiManager-Integration / EN: Bumped for WiFiManager integration
+const char* FW_VERSION = "1.0.4";                 // DE: Version angehoben für WiFiManager-Integration / EN: Bumped for WiFiManager integration
 const char* FW_BUILD   = __DATE__ " " __TIME__;   // DE: Kompilierzeit / EN: Compile timestamp
 
 // ---------- OTA-Login ----------
@@ -47,7 +47,7 @@ const bool ACTIVE_LOW = false;                                          // DE: F
 #define RELAY_ON(pin)   digitalWrite((pin), ACTIVE_LOW ? LOW  : HIGH)   // DE: Relais EIN / EN: Relay ON
 #define RELAY_OFF(pin)  digitalWrite((pin), ACTIVE_LOW ? HIGH : LOW)    // DE: Relais AUS / EN: Relay OFF
 
-const uint8_t RELAY_PINS[4] = {16, 14, 12, 13}; // DE: R1..R4 Pins / EN: R1..R4 pins
+const uint8_t RELAY_PINS[4] = {12, 5, 4, 15}; // DE: R1..R4 Pins / EN: R1..R4 pins
 bool state[4] = {false, false, false, false};   // DE: Schattenzustand der Relais / EN: Shadow state of relays
 
 // ---------- Status / Telemetrie ----------
@@ -181,8 +181,8 @@ String page() {                                // DE: HTML-UI / EN: HTML UI
     "<a class='link' href='/about'>ℹ️ System-Info (JSON)</a>"
     "<a class='link' href='/wifi'>📶 WLAN clear</a>"
     "</div>"
-    "<div class='foot'>R1=GPIO16, R2=GPIO14, R3=GPIO12, R4=GPIO13"
-    "<br>Hinweis: R1 (GPIO16) kann beim Start kurz einschalten.</div>"
+    "<div class='foot'>R1=12, R2=GPIO5, R3=GPIO4, R4=GPIO15"
+    "<br>Hinweis: R1 (GPIO12) kann beim Start kurz einschalten.</div>"
     "</body></html>";                         // DE/EN: footer
   return s;                                   // DE/EN: return
 }
@@ -293,7 +293,7 @@ String wifiPage() {                              // DE: WLAN-UI / EN: WiFi UI
     "<div class='card'>"
       "<div class='muted'>Verbunden mit: <b>" + ssid + "</b> &bull; IP: " + ip + "</div>"
       "<p><b>Wichtig:</b> Das Löschen der Zugangsdaten trennt die Verbindung und startet das Gerät neu."
-      "<br>Nach dem Neustart erscheint ein Access Point <code>ESP12F_Relay_X4</code> (WiFiManager-Portal).</p>"
+      "<br>Nach dem Neustart erscheint ein Access Point <code>ESP8285_Relay_X4</code> (WiFiManager-Portal).</p>"
       "<form method='post' action='/wifi/reset' "
       "onsubmit='return confirm(\"Zugangsdaten löschen und neu starten?\\nWiFiManager-Portal erscheint nach dem Boot.\");'>"
         "<button type='submit'>WiFi-Zugangsdaten löschen & Neustarten</button> "
